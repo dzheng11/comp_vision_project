@@ -6,7 +6,7 @@ import torch.nn.functional as F
 import torch.optim as optim
 
 from PIL import Image
-import matplotlib.pyplot as plt
+# import matplotlib.pyplot as plt
 
 import torchvision.transforms as transforms
 import torchvision.models as models
@@ -32,7 +32,8 @@ def imshow(tensor):
     image = tensor.cpu().clone()  # we clone the tensor to not do changes on it
     image = image.squeeze(0)      # remove the fake batch dimension
     image = unloader(image)
-    image.show()
+
+    image.save("result.jpg")
 
 class ContentLoss(nn.Module):
 
@@ -151,8 +152,8 @@ assert style_img.size() == content_img.size(), \
 
 unloader = transforms.ToPILImage() 
 
-imshow(style_img)
-imshow(content_img)
+# imshow(style_img)
+# imshow(content_img)
 
 
 cnn = models.vgg19(pretrained=True).features.to(device).eval()
